@@ -1,14 +1,15 @@
 const { ServiceProvider } = require('@adonisjs/fold')
-const Env = use('Env')
+import { env } from '@adonisjs/env/build/standalone'
+
 class RamenAuthProvider extends ServiceProvider {
 	register() {
 		// register bindings
 		this.app.singleton('RamenAuth/User', () => {
-			const User = this.app.use(Env.get('USER_MODEL'))
+			const User = this.app.use(env.get('USER_MODEL'))
 			return User
 		})
 		this.app.singleton('RamenAuth/Profile', () => {
-			const Profile = this.app.use(Env.get('PROFILE_MODEL'))
+			const Profile = this.app.use(env.get('PROFILE_MODEL'))
 			return Profile
 		})
 	}
