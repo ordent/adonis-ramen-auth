@@ -1,5 +1,5 @@
 const { ServiceProvider } = require('@adonisjs/fold')
-import { env } from '@adonisjs/env/build/standalone'
+const { env } = require('@adonisjs/env/build/standalone')
 
 class RamenAuthProvider extends ServiceProvider {
 	register() {
