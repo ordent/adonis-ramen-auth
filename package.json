@@ -16,6 +16,14 @@
 		"adonisjs",
 		"adonis-app"
 	],
-	"author": "kurukururuu",
-	"license": "ISC"
+	"author": "kurukururuu & dimassrio",
+	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ordent/adonis-ramen-auth.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ordent/adonis-ramen-auth/issues"
+	},
+	"homepage": "https://github.com/ordent/adonis-ramen-auth#readme"
 }
