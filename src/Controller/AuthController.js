@@ -7,16 +7,16 @@ const {
 const {
 	NotFoundException,
 	UnauthorizedException,
-	RamenException
+	RamenException,
 } = require('@ordent/ramenbox/src/Exception')
 
 const Config = use('Config')
-const Env = use('Env')
-const User = use('../Models/User')
-const AuthService = use('../Service/AuthService')
+// const Env = use('Env')
+// const User = use('../Models/User')
+const AuthService = require('../Service/AuthService')
 class AuthController extends RamenController {
 	constructor() {
-		super(new AuthService(User))
+		super(new AuthService())
 	}
 	// login, logout, user, refresh token, update profile, user status
 	async login({ request, response, transform, auth }) {
@@ -51,8 +51,11 @@ class AuthController extends RamenController {
 			const authUser = await auth.getUser()
 			const authRole = await authUser.getRoles()
 			if (
-				(authUser.id !== user.id) &&
-				!(authRole.includes('super') || authRole.includes('administrator'))
+				authUser.id !== user.id &&
+				!(
+					authRole.includes('super') ||
+					authRole.includes('administrator')
+				)
 			) {
 				throw new UnauthorizedException('Not authorized')
 			}
@@ -61,7 +64,7 @@ class AuthController extends RamenController {
 			// return error.message || 'Missing or invalid jwt token'
 		}
 
-		const data = await this.getServices().postProfile({ request}, auth )
+		const data = await this.getServices().postProfile({ request }, auth)
 		return data
 	}
 
