@@ -3,7 +3,7 @@ const { RamenServices } = require('@ordent/ramenbox/src/Services/RamenServices')
 const {
 	NotFoundException,
 	UnauthorizedException,
-	RamenException
+	RamenException,
 } = require('@ordent/ramenbox/src/Exception')
 const {
 	RamenRepository,
@@ -18,11 +18,13 @@ const { requestBody } = require('@ordent/ramenbox/src/Utilities')
 const Config = use('Config')
 const Sentry = use('Sentry')
 const Mail = use('Mail')
-const Profile = use('../Models/Profile')
-const Token = use('../Models/Token')
-const User = use('../Models/User')
+const User = use('RamenAuth/User')
+const Profile = use('RamenAuth/Profile')
 class AuthServices extends RamenServices {
 	constructor() {
+		this.repositories = {
+			profile: new RamenRepository(Profile),
+		}
 		super(User)
 	}
 
@@ -254,11 +256,13 @@ class AuthServices extends RamenServices {
 		await this.getValidator().validate(value, 'put')
 		this.setCustomRepositorySingleton(
 			'profile',
-			new RamenRepository(Profile)
+			this.getCustomRepository('profile')
 		)
 		this.setCustomFilterSingleton(
 			'profile',
-			new (RamenValidatorGenerator(Profile))()
+			new (RamenValidatorGenerator(
+				this.getCustomRepository('profile').getModel()
+			))()
 		)
 		await this.getCustomFilter('profile').validate(request, 'put')
 
@@ -298,7 +302,8 @@ class AuthServices extends RamenServices {
 		await user.tokens().save(token)
 		// send email
 		if (token !== null) {
-			const url = Config._config.authConfig.appUrl || 'http://127.0.0.1:3333'
+			const url =
+				Config._config.authConfig.appUrl || 'http://127.0.0.1:3333'
 			const verifyUrl = url + '/api/v1/forgot/verify?token=' + token.token
 			user.verify_url = verifyUrl
 			try {
@@ -314,7 +319,7 @@ class AuthServices extends RamenServices {
 				})
 			} catch (error) {
 				throw new RamenException(error)
-			} 
+			}
 		}
 	}
 
