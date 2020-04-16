@@ -1,0 +1,21 @@
+{
+	"name": "@ordent/adonis-ramen-auth",
+	"version": "1.0.0",
+	"description": "adonisjs auth api packages for gerai app.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"devDependencies": {},
+	"dependencies": {
+		"prettier": "^2.0.4",
+		"@ordent/ramenbox": "^2.0.32",
+		"adonis-acl": "^1.1.1"
+	},
+	"keywords": [
+		"adonisjs",
+		"adonis-app"
+	],
+	"author": "kurukururuu",
+	"license": "ISC"
+}

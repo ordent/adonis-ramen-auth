@@ -1,0 +1,38 @@
+{
+	"env": {
+		"node": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2017,
+		"ecmaFeatures": {
+			"experimentalObjectRestSpread": true
+		}
+	},
+	"plugins": ["prettier"],
+	"extends": ["plugin:prettier/recommended"],
+	"rules": {
+		"radix": 0,
+		"max-len": 0,
+		"no-return-await": 0,
+		"prefer-object-spread": 0,
+		"strict": "off",
+		"indent": ["error", "tab"],
+		"semi": ["error", "never"],
+		"class-methods-use-this": "off",
+		"global-require": "off",
+		"no-param-reassign": [
+			"error",
+			{
+				"props": false
+			}
+		],
+		"no-tabs": 0,
+		"arrow-body-style": 0,
+		"no-restricted-syntax": 0,
+		"no-await-in-loop": 0,
+		"camelcase": 0
+	},
+	"globals": {
+		"use": true
+	}
+}
