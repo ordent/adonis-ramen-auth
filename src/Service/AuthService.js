@@ -22,10 +22,10 @@ const User = use('RamenAuth/User')
 const Profile = use('RamenAuth/Profile')
 class AuthServices extends RamenServices {
 	constructor() {
+		super(User)
 		this.repositories = {
 			profile: new RamenRepository(Profile),
 		}
-		super(User)
 	}
 
 	async login({ request }, auth) {
