@@ -109,8 +109,8 @@ class AuthServices extends RamenServices {
 					Mail.send('verifications', token, (message) => {
 						message
 							.to(data.email)
-							.from('hello@ordent.co')
-							.subject('Welcome to Healed')
+							.from(Env.get('MAIL_GLOBAL_FROM'))
+							.subject(Env.get('MAIL_REGISTER_SUBJECT'))
 					})
 				} catch (e) {
 					Sentry.captureException(e)
@@ -303,15 +303,15 @@ class AuthServices extends RamenServices {
 		// send email
 		if (token !== null) {
 			const url =
-				Config._config.authConfig.appUrl || 'http://127.0.0.1:3333'
+				Config._config.authConfig.appUrl || 'http://127.0.0.1:3333' // ini harus diganti host
 			const verifyUrl = url + '/api/v1/forgot/verify?token=' + token.token
 			user.verify_url = verifyUrl
 			try {
 				await Mail.send('forgot', user.toJSON(), (message) => {
 					message
 						.to(user.email)
-						.from('hello@ordent.co')
-						.subject('Forgot your Password in Gerai+?')
+						.from(Env.get('MAIL_GLOBAL_FROM'))
+						.subject(Env.get('MAIL_FORGOT_SUBJECT'))
 				})
 				return this.getResponse().setStatus(200).rawItem({
 					success: true,
