@@ -47,7 +47,7 @@ class AuthServices extends RamenServices {
 			.where('email', email)
 			.first()
 		data.users.profiles = await data.users.profiles().first()
-		data.roles = await data.users.getRoles()
+		// data.roles = await data.users.getRoles()
 		return this.getResponse().setStatus(200).rawItem(data)
 	}
 
