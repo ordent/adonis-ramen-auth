@@ -310,9 +310,9 @@ class AuthServices extends RamenServices {
 		await user.tokens().save(token)
 		// send email
 		if (token !== null) {
-			const url =
-				Config._config.authConfig.appUrl || 'http://127.0.0.1:3333' // ini harus diganti host
-			const verifyUrl = url + '/api/v1/forgot/verify?token=' + token.token
+			// const url =
+			// 	Config._config.authConfig.appUrl || 'http://127.0.0.1:3333' // ini harus diganti host
+			const verifyUrl = Env.get('CONFIRM_FORGOT_URL') + token.token
 			user.verify_url = verifyUrl
 			try {
 				await Mail.send('forgot', user.toJSON(), (message) => {
