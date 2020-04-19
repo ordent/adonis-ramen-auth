@@ -14,7 +14,7 @@ class RamenAuthProvider extends ServiceProvider {
 		})
 
 		this.app.singleton('RamenAuth/Token', () => {
-			const Token = this.app.use(env.get('Token_MODEL'))
+			const Token = this.app.use(env.get('TOKEN_MODEL'))
 			return Token
 		})
 	}
