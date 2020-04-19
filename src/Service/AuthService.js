@@ -21,6 +21,7 @@ const Mail = use('Mail')
 const User = use('RamenAuth/User')
 const Profile = use('RamenAuth/Profile')
 const Env = use('Env')
+const Token = require('../Models/Token')
 class AuthServices extends RamenServices {
 	constructor() {
 		super(User)

@@ -21,10 +21,6 @@ class Token extends RamenModel {
 	users() {
 		return this.belongsTo('App/Models/User', 'user_id', 'id')
 	}
-
-	// static get transformers () {
-	// 	return 'test'
-	// }
 }
 
 module.exports = Token
