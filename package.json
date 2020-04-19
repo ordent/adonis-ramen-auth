@@ -1,6 +1,6 @@
 {
 	"name": "@ordent/adonis-ramen-auth",
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"description": "adonisjs auth api packages for gerai app.",
 	"main": "index.js",
 	"scripts": {
