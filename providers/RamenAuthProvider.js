@@ -12,6 +12,11 @@ class RamenAuthProvider extends ServiceProvider {
 			const Profile = this.app.use(env.get('PROFILE_MODEL'))
 			return Profile
 		})
+
+		this.app.singleton('RamenAuth/Token', () => {
+			const Token = this.app.use(env.get('Token_MODEL'))
+			return Token
+		})
 	}
 
 	boot() {

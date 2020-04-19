@@ -21,7 +21,7 @@ const Mail = use('Mail')
 const User = use('RamenAuth/User')
 const Profile = use('RamenAuth/Profile')
 const Env = use('Env')
-const Token = require('../Models/Token')
+const Token = require('RamenAuth/Token')
 class AuthServices extends RamenServices {
 	constructor() {
 		super(User)
@@ -162,8 +162,14 @@ class AuthServices extends RamenServices {
 	}
 
 	async getDataFromToken(request) {
-		const { token } = request.all()
-		this.setCustomRepositorySingleton('token', new RamenRepository(Token))
+		const { token } = Object.assign(request.all(), request.params)
+		if (!this.getCustomRepository('token')) {
+			this.setCustomRepositorySingleton(
+				'token',
+				new RamenRepository(Token)
+			)
+		}
+		console.log(this.getCustomRepository('token').getModel())
 		const data = await this.getCustomRepository('token')
 			.getModel()
 			.query()
