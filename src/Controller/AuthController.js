@@ -15,8 +15,9 @@ const Config = use('Config')
 // const User = use('../Models/User')
 const AuthService = require('../Service/AuthService')
 class AuthController extends RamenController {
-	constructor() {
-		super(new AuthService())
+	constructor(base) {
+		const service = base ? new base() : new AuthService()
+		super(service)
 	}
 	// login, logout, user, refresh token, update profile, user status
 	async login({ request, response, transform, auth }) {
