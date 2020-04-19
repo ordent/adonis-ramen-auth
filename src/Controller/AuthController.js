@@ -132,6 +132,20 @@ class AuthController extends RamenController {
 		const data = await this.getServices().rememberPassword({ request })
 		return data
 	}
+
+	async postRemember({ request, response, transform }) {
+		this.getServices().getResponse().setResponse(response)
+		this.getServices().getResponse().setManager(transform)
+		const data = await this.getServices().rememberPassword({ request })
+		return data
+	}
+
+	async postConfirmationEmail({ request, response, transform }) {
+		this.getServices().getResponse().setResponse(response)
+		this.getServices().getResponse().setManager(transform)
+		const data = await this.getServices().postConfirmationEmail({ request })
+		return data
+	}
 }
 
 module.exports = AuthController
